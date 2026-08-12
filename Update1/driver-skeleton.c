@@ -35,11 +35,6 @@ static const luaL_Reg user_api_registry[] = {
     // functions to this array in order to ensure
     // they can be imported from the Lua Interpreter.
 
-    // NOTE: the { "Function Name", Function Pointer } entries
-    // below are the 'Example Lua API' functions that are
-    // defined previously.
-
-
 
     {NULL, NULL}
 };
