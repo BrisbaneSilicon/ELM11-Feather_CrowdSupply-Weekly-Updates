@@ -7,6 +7,8 @@ program_name = "<NONE>"
 
 -- Program dependencies
 
+import('msleep')
+
 
 -- Program configuration
 
