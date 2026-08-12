@@ -10,3 +10,4 @@
   |luaU_helloworld.c|The 'Hello World' of Driver Layer extensions.|
   |helloworld-driver.c|The full 'Hello World' driver.|
   |helloworld-application.lua|The 'Hello World' application.|
+  |bitbash-driver.c|The full 'Bit-Bash' driver.|
