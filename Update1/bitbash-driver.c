@@ -11,7 +11,12 @@
 #include "lualib.h"
 
 
-// 'Hello World' user Driver-Layer program
+// 'Bit-Bash' user Driver-Layer program
+
+#define MAX_BITBASH_SHIFT_COUNT     (32)
+                                    
+#define BITBASH_CLOCK_PIN           (3)
+#define BITBASH_DATA_PIN            (4)
 
 
 /* ------------------ Users Lua API ----------------------  */
@@ -26,16 +31,48 @@
 
 
 /*
-** The 'Hello World' of Driver Layer extensions.
+** The 'Bit-Bash' of Driver Layer extension.
 */
-static int luaU_helloworld (lua_State *L) {
+static int luaU_bitbash (lua_State *L) {
+    unsigned int shift_val;
+    unsigned int shift_count;
+    int n;
 
-    lua_pushstring(L, "Hello World!");
-        // NOTE: push a constant string onto the
-        // the Lua stack.
+    n = lua_gettop(L);
+    if (n != 2) {
+        // NOTE: verify two arguments have
+        // been passed to the function.
 
-    return 1;
-        // NOTE: one result was pushed onto the
+        luaL_error(L, "unexpected argument");
+    }
+    
+    // REVISIT: this function assumes that the I/O
+    // are configured correctly...
+
+    shift_val = (unsigned int)luaL_checkinteger(L, 1);
+        // NOTE: fetch and check first argument (value
+        // to shift) is an integer    
+    shift_count = (unsigned int)luaL_checkinteger(L, 2);
+        // NOTE: fetch and check second argument (number
+        // of bits to shift) is an integer
+        
+    if(shift_count > MAX_BITBASH_SHIFT_COUNT){
+        luaL_error(L, "Max bitbash shift count (%d) exceeded!", MAX_BITBASH_SHIFT_COUNT);
+    }
+    
+    for(; shift_count > 0; shift_count--) {
+        set_gpio(BITBASH_CLOCK_PIN, 0);
+        set_gpio(BITBASH_DATA_PIN, (shift_val & 1));
+        set_gpio(BITBASH_CLOCK_PIN, 1);
+        
+        shift_val >>= 1;
+    }
+    
+    set_gpio(BITBASH_CLOCK_PIN, 0);
+    set_gpio(BITBASH_DATA_PIN, 0);
+
+    return 0;
+        // NOTE: no results were pushed onto the
         // the Lua stack.
 }
 
@@ -47,7 +84,7 @@ static const luaL_Reg user_api_registry[] = {
     // functions to this array in order to ensure
     // they can be imported from the Lua Interpreter.
 
-    {"helloworld", luaU_helloworld},
+    {"bitbash", luaU_bitbash},
 
     {NULL, NULL}
 };
