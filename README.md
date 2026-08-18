@@ -11,3 +11,8 @@
   |helloworld-driver.c|The full 'Hello World' driver.|
   |helloworld-application.lua|The 'Hello World' application.|
   |bitbash-driver.c|The full 'Bit-Bash' driver.|
+
+### Folder: Update 2
+  |File|Description|
+  |----|-----------|
+  |hardware-skeleton.sv|Skeleton user Hardware Layer firmware (i.e. 'user.sv' - see [here](https://github.com/BrisbaneSilicon/Arvore#code-editor)).|
