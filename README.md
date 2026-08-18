@@ -16,3 +16,6 @@
   |File|Description|
   |----|-----------|
   |hardware-skeleton.sv|Skeleton user Hardware Layer firmware (i.e. 'user.sv' - see [here](https://github.com/BrisbaneSilicon/Arvore#code-editor)).|
+  |hardware-registers.sv|Hardware Layer extension that includes a small register set.|
+  |driver-hwbitbash.c|Driver Layer that supports plumbing from the Application Layer to hardware-bitbash.sv|
+  |hardware-bitbash.sv|Hardware Layer extension that supports the bit-bash functionality.|
